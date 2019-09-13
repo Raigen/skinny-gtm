@@ -19,7 +19,7 @@ dataLayer.push({
 }
 
 if (window.eComEventTarget) {
-  window.eComEventTarget.addEventListner('pageview', function (event) {
+  window.eComEventTarget.addEventListener('pageview', function (event) {
     var url = event.detail.url
     if (url === '/cart') checkoutStep(1)
     if (url === '/checkout/personal-data') checkoutStep(2)
