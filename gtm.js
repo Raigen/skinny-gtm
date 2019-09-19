@@ -66,9 +66,23 @@ if (window.eComEventTarget) {
     });
   })
   window.eComEventTarget.addEventListener('cart:add', function (event) {
-    // event.detail.cart is a Immutable.Map
+    // product is a plain JSON
+    const product = event.detail.product
+    const ecommerce = product ? {
+      'currencyCode': product.salesPrice.currency,
+      'add': {
+        'products' : [{
+          'name': product.get('name'),
+          'id': product.get('sku'),
+          'price': String(product.getIn(['price', 'amount'])),
+          'quantity': event.detail.quantity
+        }]
+      }
+    } : undefined
+    
     dataLayer.push({
-      event: 'addToCart'
+      event: 'addToCart',
+      'ecommerce': ecommerce
     })
   })
 }
