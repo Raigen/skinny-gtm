@@ -47,11 +47,15 @@ if (window.eComEventTarget) {
     console.log('product:', event.detail.product.toJS())
   })
   window.eComEventTarget.addEventListener('category', function (event) {
-    const products = event.detail.products.map(function(product) {
+    const categoryName = category !== undefined ? category.get('title') : 'null'
+    const products = event.detail.products.map(function(product, index) {
       return {
         'name': product.get('name'),
         'id': product.get('sku'),
-        'price': product.getIn(['price', 'amount'])
+        'price': String(product.getIn(['price', 'amount'])),
+        'category': categoryName,
+        'list': 'category/' + categoryName,
+        'position': index + 1
       }
     })
     dataLayer.push({
