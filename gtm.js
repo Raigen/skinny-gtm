@@ -38,7 +38,7 @@ if (window.eComEventTarget) {
           'products': [{
              'name': product.get('name'),
              'id': product.get('sku'),
-             'price': product.getIn(['price', 'amount'])
+             'price': String(product.getIn(['price', 'amount']))
           }]
         }
       }
