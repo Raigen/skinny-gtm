@@ -65,6 +65,8 @@ if (window.eComEventTarget) {
       }
     });
   })
+  
+  /* Cart interactions */
   window.eComEventTarget.addEventListener('cart:add', function (event) {
     // product is a plain JSON
     const product = event.detail.product
@@ -83,6 +85,27 @@ if (window.eComEventTarget) {
     dataLayer.push({
       event: 'addToCart',
       'ecommerce': ecommerce
+    })
+  })
+  window.eComEventTarget.addEventListener('cart:setQuantity', function (event) {
+    // product is a plain JSON
+    const product = event.detail.lineItem
+    const quantityDelta = event.detail.quantityDelta
+    const action = quantityDelta > 0 'addToCart' : 'removeFromCart'
+    
+    dataLayer.push({
+      event: action,
+      'ecommerce': {
+        'currencyCode': product.salesPrice.currency,
+        [action]: {
+          'products' : [{
+            'name': product.get('name'),
+            'id': product.get('sku'),
+            'price': String(product.getIn(['price', 'amount'])),
+            'quantity': Math.abs(quantityDelta)
+          }]
+        }
+      }
     })
   })
 }
