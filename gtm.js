@@ -47,6 +47,7 @@ if (window.eComEventTarget) {
     console.log('product:', event.detail.product.toJS())
   })
   window.eComEventTarget.addEventListener('category', function (event) {
+    const category = event.detail.category
     const categoryName = category !== undefined ? category.get('title') : 'null'
     const products = event.detail.products.map(function(product, index) {
       return {
