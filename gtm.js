@@ -91,10 +91,11 @@ if (window.eComEventTarget) {
     // product is a plain JSON
     const product = event.detail.lineItem
     const quantityDelta = event.detail.quantityDelta
-    const action = quantityDelta > 0 'addToCart' : 'removeFromCart'
+    const event = quantityDelta > 0 'addToCart' : 'removeFromCart'
+    const action = quantityDelta > 0 'add' : 'remove'
     
     dataLayer.push({
-      event: action,
+      event: event,
       'ecommerce': {
         'currencyCode': product.salesPrice.currency,
         [action]: {
