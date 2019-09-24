@@ -114,6 +114,7 @@ if (window.eComEventTarget) {
     var order = event.detail;
     if (order) {
       dataLayer.push({
+        event: 'purchase',
         'ecommerce': {
           'purchase': {
             'actionField': {
