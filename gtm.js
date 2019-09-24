@@ -110,4 +110,31 @@ if (window.eComEventTarget) {
       }
     })
   })
+  window.eComEventTarget.addEventListener('order:completed', function (event) {
+    var order = event.detail;
+    if (order) {
+      dataLayer.push({
+        'ecommerce': {
+          'purchase': {
+            'actionField': {
+              'id': order.orderId,                         // Transaction ID. Required for purchases and refunds.
+              'affiliation': 'Online Store',
+              'revenue': order.grandTotal,                     // Total transaction value (incl. tax and shipping)
+              'tax': order.lineItemContainer.totalTax.amount,
+              'shipping': order.shippingData.price.amount
+              // 'coupon': order.couponCampaign.name
+            },
+            'products': order.lineItemContainer.productLineItems.map(function(product) {
+              return {
+                'id': product.sku,
+                'name': product.name,
+                'price': product.singleItemPrice.amount,
+                'quantity': product.quantity.amount
+              }
+            })
+          }
+        }
+      })
+    }
+  })
 }
