@@ -92,8 +92,8 @@ if (window.eComEventTarget) {
     // product is a plain JSON
     const product = event.detail.lineItem
     const quantityDelta = event.detail.quantityDelta
-    const eventName = quantityDelta > 0 'addToCart' : 'removeFromCart'
-    const action = quantityDelta > 0 'add' : 'remove'
+    const eventName = quantityDelta > 0 ? 'addToCart' : 'removeFromCart'
+    const action = quantityDelta > 0 ? 'add' : 'remove'
     
     dataLayer.push({
       event: eventName,
