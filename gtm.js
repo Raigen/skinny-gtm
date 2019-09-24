@@ -72,12 +72,12 @@ if (window.eComEventTarget) {
     // product is a plain JSON
     const product = event.detail.product
     const ecommerce = product ? {
-      'currencyCode': product.salesPrice.currency,
+      'currencyCode': product.price.currency,
       'add': {
         'products' : [{
-          'name': product.get('name'),
-          'id': product.get('sku'),
-          'price': String(product.getIn(['price', 'amount'])),
+          'name': product.name,
+          'id': product.sku,
+          'price': String(product.price.amount),
           'quantity': event.detail.quantity
         }]
       }
