@@ -98,12 +98,12 @@ if (window.eComEventTarget) {
     dataLayer.push({
       event: eventName,
       'ecommerce': {
-        'currencyCode': product.salesPrice.currency,
+        'currencyCode': product.singleItemPrice.currency,
         [action]: {
           'products' : [{
             'name': product.get('name'),
             'id': product.get('sku'),
-            'price': String(product.getIn(['price', 'amount'])),
+            'price': String(product.singleItemPrice.amount),
             'quantity': Math.abs(quantityDelta)
           }]
         }
