@@ -101,8 +101,8 @@ if (window.eComEventTarget) {
         'currencyCode': product.singleItemPrice.currency,
         [action]: {
           'products' : [{
-            'name': product.get('name'),
-            'id': product.get('sku'),
+            'name': product.name,
+            'id': product.sku,
             'price': String(product.singleItemPrice.amount),
             'quantity': Math.abs(quantityDelta)
           }]
