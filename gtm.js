@@ -48,8 +48,6 @@ if (window.eComEventTarget) {
         }
       }
     })
-    
-    console.log('product:', event.detail.product.toJS())
   })
   window.eComEventTarget.addEventListener('category', function (event) {
     const category = event.detail.category
@@ -63,10 +61,10 @@ if (window.eComEventTarget) {
         'list': 'category/' + categoryName,
         'position': index + 1
       }
-    })
+    }) 
     dataLayer.push({
       'ecommerce': {
-        'currencyCode': event.detail.products.get(0).getIn(['price', 'currency']),                       // Local currency is optional.
+        'currencyCode': event.detail.products.getIn([0, 'price', 'currency'], ''),                       // Local currency is optional.
         'impressions': products.toJS()
       }
     });
