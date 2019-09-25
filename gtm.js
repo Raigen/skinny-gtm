@@ -21,12 +21,17 @@ dataLayer.push({
 if (window.eComEventTarget) {
   window.eComEventTarget.addEventListener('pageview', function (event) {
     var url = event.detail.url
-    if (url === '/cart') checkoutStep(1)
-    if (url === '/checkout/personal-data') checkoutStep(2)
-    if (url === '/checkout/shipping') checkoutStep(3)
-    if (url === '/checkout/payment') checkoutStep(4)
-    if (url === '/checkout/confirmation') checkoutStep(5)
-    if (url === '/o') checkoutStep(6)
+    if (url === '/cart') return checkoutStep(1)
+    if (url === '/checkout/personal-data') return checkoutStep(2)
+    if (url === '/checkout/shipping') return checkoutStep(3)
+    if (url === '/checkout/payment') return checkoutStep(4)
+    if (url === '/checkout/confirmation') return checkoutStep(5)
+    if (url === '/o') return checkoutStep(6)
+    dataLayer.push({
+      event: 'Pageview',
+      pagePath: url,
+      pageTitle: document.title
+    })
   })
   
   window.eComEventTarget.addEventListener('product', function (event) {
